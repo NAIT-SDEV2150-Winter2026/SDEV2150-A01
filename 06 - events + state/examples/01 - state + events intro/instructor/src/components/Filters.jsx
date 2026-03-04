@@ -122,7 +122,7 @@ export default function Filters() {
                 id="openNow"
                 className="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500"
                 onChange={(e) => setOpenNow(e.target.checked)}
-                value={openNow}
+                checked={openNow}
               />
               Open now
             </label>
@@ -136,7 +136,7 @@ export default function Filters() {
                 id="virtual"
                 className="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500"
                 onChange={(e) => setVirtual(e.target.checked)}
-                value={virtual}
+                checked={virtual}
               />
               Virtual options
             </label>
