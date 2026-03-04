@@ -8,8 +8,10 @@ import Card from './ui/Card';
 export default function Filters() {
 
   const [searchTerm, setSearchTerm] = useState('')
-  // because we're selecting multiple things at once, it makes sense to use an array
+  // because we're selecting multiple categories at once, it makes sense to use an array
   const [selectedCategories, setSelectedCategories] = useState([])
+  const [openNow, setOpenNow] = useState(false)
+  const [virtual, setVirtual] = useState(false)
 
   function toggleCategory(category) {
     // when I get a category, that means it's been clicked.
@@ -90,18 +92,28 @@ export default function Filters() {
                 type="checkbox"
                 id="openNow"
                 className="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500"
+                onChange={(e) => setOpenNow(e.target.checked)}
+                value={openNow}
               />
               Open now
             </label>
+            <p className="text-sm">
+              Open now is selected: {openNow ? 'Yes' : 'No'}
+            </p>
 
             <label className="flex items-center gap-2 text-sm text-gray-700">
               <input
                 type="checkbox"
                 id="virtual"
                 className="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500"
+                onChange={(e) => setVirtual(e.target.checked)}
+                value={virtual}
               />
               Virtual options
             </label>
+            <p className="text-sm">
+              Virtual is selected: {virtual ? 'Yes' : 'No'}
+            </p>
           </div>
 
           <hr className="border-gray-200" />
