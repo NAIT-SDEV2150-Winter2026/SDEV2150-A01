@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 
 
+const API_BASE_URL = 'http://localhost:3000';  // our local backend REST API
+
+
 export function useResources() {
+    console.log("firing hook!!!")
     // 1. state
     const [resources, setResources] = useState([]);
     const [isLoading, setIsLoading] = useState(true);  // so we can conditionally render e.g. loading msg
@@ -9,7 +13,24 @@ export function useResources() {
 
     // 2. fetch function
     async function fetchResources() {
-        
+      // If I'm initiating a fetch, loading/error states should reset
+      setIsLoading(true);
+      setError(null);
+
+      try {
+        const res = await fetch(`${API_BASE_URL}/resources`);
+
+        if (!res.ok) {
+          throw new Error(`Request failed: ${res.status} ${res.statusText}`);
+        }
+
+        const data = await res.json();
+        setResources(data);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setIsLoading(false);
+      }
     }
 
     // 3. effect
