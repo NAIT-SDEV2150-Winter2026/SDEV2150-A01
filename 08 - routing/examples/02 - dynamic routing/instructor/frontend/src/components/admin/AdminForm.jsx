@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router';
+
 import { useEffect, useState } from 'react';
 
 import Card from '../ui/Card';
@@ -18,6 +20,8 @@ export default function AdminForm({
     virtual: false,
     openNow: false,
   });
+
+  const navigate = useNavigate(); // lets you programmatically route to a path
 
   const resetForm = () => {
     setFormData({
@@ -180,7 +184,7 @@ export default function AdminForm({
 					    <button
 					      type="reset"
 					      className="rounded border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
-					      onClick={resetForm}
+					      onClick={() => { navigate("/admin/")} }
 					    >
 					      Reset
 					    </button>

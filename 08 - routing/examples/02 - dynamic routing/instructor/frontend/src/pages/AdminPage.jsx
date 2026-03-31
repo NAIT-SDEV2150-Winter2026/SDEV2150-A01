@@ -31,11 +31,12 @@ export default function AdminPage() {
         </div>
       )}
 
-            <AdminForm
-              resources={resources}
-              resourceId={resourceId}
-              onResourceChange={addResource}
-            />
+      <AdminForm
+        key={resourceId ?? 'new'}
+        resources={resources}
+        resourceId={resourceId}
+        onResourceChange={addResource}
+      />
 
 
       <section className="md:col-span-3 lg:col-span-3">
