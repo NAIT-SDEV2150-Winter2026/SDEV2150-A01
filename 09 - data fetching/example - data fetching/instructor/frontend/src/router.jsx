@@ -50,4 +50,39 @@ export async function adminLoader({ params }) {
 
 
 // ACTIONS ------------------------------------------------------------------------------
-export async function AdminAction({ request, params }) {}
+export async function adminAction({ request, params }) {
+  const formData = await request.formData();
+
+  const payload = {
+    title: formData.get('title'),
+    category: formData.get('category'),
+    summary: formData.get('summary'),
+    location: formData.get('location'),
+    hours: formData.get('hours'),
+    contact: formData.get('contact'),
+    virtual: formData.get('virtual') === 'on',
+    openNow: formData.get('openNow') === 'on',
+  };
+
+  const isEditing = Boolean(params.resourceId);
+  const url = isEditing
+    ? `${API_BASE_URL}/resources/${params.resourceId}`
+    : `${API_BASE_URL}/resources`;
+  const method = isEditing ? 'PUT' : 'POST';
+
+  const res = await fetch(url, {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    throw new Error(`Could not ${isEditing ? 'update' : 'create'} resource`);
+  }
+
+  const savedResource = await res.json();
+
+  return redirect(`/admin/${savedResource.id}`); 
+}
