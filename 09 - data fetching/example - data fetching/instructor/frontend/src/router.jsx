@@ -1,4 +1,5 @@
 import { API_BASE_URL, getResources, getResourceById } from './api/resources';
+import { redirect } from 'react-router';
 
 
 // LOADERS ------------------------------------------------------------------------------
